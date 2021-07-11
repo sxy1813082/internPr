@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>忘记密码</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="css/me.css">
+    <script src = "checkNull.js"></script>
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        .steps {
+            position: relative;
+            margin-top:40px;
+            counter-reset: step;
+            background: #fff;
+            /* margin: 4rem 0rem 4.4rem; */
+            overflow: hidden;
+        }
+        /* 步骤描述 */
+        .steps li {
+            list-style-type: none;
+            text-align: center;
+            width: 33.3%;
+            position: relative;
+            float: left;
+            padding: 23px 0;
+            font-size:18px;
+            font-family: MicrosoftYaHeiUI;
+            color: rgba(68, 68, 68, 1);
+            line-height: 3.5rem;
+        }
+        /* 步骤数字 */
+        .steps li:before {
+            display: block;
+            content: counter(step);
+            /* 设定计数器内容 */
+            counter-increment: step;
+            /* 计数器值递增 */
+            width: 40px;
+            height: 40px;
+            border-radius:40px;
+            color: #fff;
+            text-align: center;
+            font-weight: 600;
+            margin: 0 auto 0 auto;
+            font-size: 16px;
+            line-height:40px;
+            font-family: MicrosoftYaHeiUI;
+            color:#266fe9;
+            background: rgba(255, 255, 255, 1);
+            border: 2px solid #266fe9;
+        }
+        /* 步骤数字 */
+        .steps .grey:before {
+            color: #CBCBCB !important;
+            border: 0.2rem solid #CBCBCB !important;
+        }
+        .done:before {
+            background-image: url("img/dui.png") !important;
+            background-size: cover !important;
+            background-repeat: no-repeat;
+            content: '' !important;
+        }
+        /* 连接线 */
+        .steps li~li:after {
+            content: '';
+            width: 83%;
+            height: 0.3rem;
+            background-color: #CBCBCB;
+            position: absolute;
+            left: -41.5%;
+            top: 27%;
+            z-index: 0;
+        }
+        /* 将当前/完成步骤之前的数字及连接线变绿 */
+        .grey {
+            color: #CBCBCB !important;
+        }
+        .done {
+            color: #0D3982 !important;
+        }
+        .active{
+            color: #266fe9 !important;
+        }
+    </style>
+</head>
+<body style="margin-top: 100px;text-align:center;">
+<!--<img src="img/first.png" style="width: 700px;margin-bottom: 80px">-->
+<div class="step1">
+    <div class="stepWrap">
+        <ul class="steps">
+            <li class="active">验证用户邮箱</li>
+            <li class="grey">重置密码</li>
+            <li class='grey'>提交审核</li>
+        </ul>
+    </div>
+</div>
+<form role="form" th:action = "@{/findEmail}" method="post" th:object="${user}" onsubmit = "return checkInput(this)">
+    <div style="align-items: flex-start;justify-content: left;">
+        <div style='color:#444444;margin-right: 100px'><span style="color:#E63A3A;">*</span>请输入联系邮箱</div>
+        <div class="ui icon input">
+            <i class="user icon"></i>
+            <input type="email" id="email" name = "email" placeholder="联系Email" oninput="sendEmail()" th:value="*{email}">
+        </div>
+    </div>
+    <br>
+    <div style="align-items: flex-start;justify-content: left;">
+        <div style='color:#444444;margin-right: 120px'><span style="color:#E63A3A;">*</span>请输入验证码</div>
+        <div class="ui icon input" style="width: 100px">
+            <i class="user icon"></i>
+            <input type="text" id="yan" name = "yan" placeholder="验证码">
+        </div>
+        <input id="myButton"  type="button" class="ui  button" onclick="sendCode(this)" value="获取验证码">
+    </div>
+
+    <br>
+    <input type="submit" id = "editEmailPassword" value = "下一步" class="ui middle middle floated teal basic button" style="margin-top: 20px;">
+    <a  href="/login" class="ui middle middle floated teal basic button">返回</a>
+</form>
+
+
+</body>
+</html>
+<script src="/webjars/jquery/jquery.js"></script>
+<script src="/webjars/sockjs-client/sockjs.js"></script>
+<script src="/webjars/stomp-websocket/stomp.js"></script>
+<script type="text/javascript">
+    var yanZheng = ['2345','1234'];
+    //这个是可以来标志我发的邮箱的验证码的
+    var visit = 1;
+    //
+    function checkInput(form) {
+        for (let i = 0; i < form.length; i++) {
+            // alert("进来了");
+            if (form.elements[i].value == "") {
+                alert("请您输入" + form.elements[i].placeholder);
+                //这里返回一个Boolean值，从而确定表单是否能够提交
+                return false;
+            }
+            //判断不同的验证码
+            if(form.elements[1].value!='2345' && visit!=0) {
+                alert("验证码错误");
+                return false;
+            }
+            if(form.elements[1].value!='1234' && visit!=1) {
+                alert("验证码错误");
+                return false;
+            }
+        }
+        return true;
+    }
+    function sendEmail(){
+        // var id = document.getElementById("email").value().toString();
+        let el = document.getElementById('myButton');
+        el.href = '/sendMessageTwo?email='+
+            document.getElementById("email").value;
+    }
+    var clock = '';
+    var nums = 10;
+    var btn;
+    function sendCode(thisBtn)
+    {
+        if (document.getElementById("email").value == ''){
+            alert("邮箱没填");
+        }
+        else {
+            btn = thisBtn;
+            btn.disabled = true; //将按钮置为不可点击
+            btn.value = nums+'秒重新获取';
+            clock = setInterval(doLoop, 1000); //一秒执行一次
+            $.ajax({
+                type: "POST", //用POST方式传输
+                dataType: "json", //数据格式:JSON
+                url: '/sendMessageTwo',
+                data: 'email='+ document.getElementById("email").value +
+                    '&yanZheng='+yanZheng[visit],
+                error: function (XMLHttpRequest, textStatus, errorThrown) { },
+                success: function (data){
+                    console.log(data);
+                }
+            });
+        }
+        if (visit == 1){
+            visit = 0;
+        }
+        else {
+            visit = 1;
+        }
+    }
+    function doLoop()
+    {
+        nums--;
+        if(nums > 0){
+            btn.value = nums+'s重新获取';
+        }else{
+            clearInterval(clock); //清除js定时器
+            btn.disabled = false;
+            btn.value = '获取验证码';
+            nums = 10; //重置时间
+        }
+    }
+</script>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>success</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="css/me.css">
+</head>
+<body style="text-align: center;margin-top: 100px">
+    <h1>成功！</h1>
+    你好用户：
+    <h2 th:text="'你的id是'+${user.id}"></h2>
+    <h1 th:text="'你的名字你知道对吧，那就是'+${user.name}">
+    </h1>
+    <h1 th:text="'你的密码是'+${user.password}">
+    </h1>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="css/me.css">
+    <script src = "checkNull.js"></script>
+</head>
+<body style="margin-top: 100px;text-align:center;">
+<form role="form" th:action = "@{/add}" method="post" onsubmit = "return checkInput(this)">
+    <div class="ui icon input" style="margin-top: 20px;">
+        <input type="text" id="name" name = "name" placeholder="名字">
+    </div>
+    <br>
+    <div class="ui icon input" style="margin-top: 20px;">
+        <input type="password" id = "password" name = "password" placeholder="密码"> <br>
+    </div>
+    <br>
+    <input type="submit" id = "add" value = "增加用户" class="ui middle middle floated teal basic button" style="margin-top: 20px;">
+</form>
+
+
+</body>
+</html>
+<script>
+    function checkInput(form) {
+        for (let i = 0; i < form.length; i++) {
+            // alert("进来了");
+            if (form.elements[i].value == "") {
+                alert("请您输入" + form.elements[i].placeholder);
+                //这里返回一个Boolean值，从而确定表单是否能够提交
+                return false;
+            }
+        }
+        return true;
+    }
+</script>
