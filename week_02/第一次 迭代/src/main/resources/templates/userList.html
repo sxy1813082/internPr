@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>userList</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="css/me.css">
+</head>
+<body class="container" onload="queryServer()">
+  <br/>
+  <h1>user list</h1>
+  <h4>这里是管理员主页</h4>
+  <br/><br/>
+  <h4>这里是用户列表</h4>
+  <div class="with:80%">
+    <table class="ui  compact teal table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>password</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="user : ${session.users}">
+      <!--   each遍历users，这样得到的user是特定的user，因此可以在特定的user上做edit操作
+         可以delete操作-->
+        <th scope="row" th:text="${user.id}"></th>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.password}"></td>
+        <td><a th:href="@{/toEdit(id=${user.id})}"class="ui orange basic left pointing label"><i class="clone icon"></i>edit</a></td>
+        <td><a th:href="@{/delete(id=${user.id})}"class="ui orange basic left pointing label"><i class="link close icon"></i>delete</a></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2 control-label">
+      <a href="/toAdd" th:href="@{/toAdd}" class="ui mini left floated teal basic button">add</a>
+    </div>
+    <div class="col-sm-2 control-label">
+      <a href="/login" class="ui mini left floated teal basic button">返回用户主页</a>
+    </div>
+  </div>
+  <br/><br/>
+
+  <h4>这里是所有用户的申请列表</h4>
+  <div class="with:80%" style="height: 400px;overflow: auto">
+    <table class="ui  compact teal table" style="max-height: 400px">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>UserId</th>
+        <th>电话</th>
+        <th>职位</th>
+        <th>状态</th>
+        <th>工作经历</th>
+        <th>营业执照</th>
+        <th>通过</th>
+        <th>未通过</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="commit:${session.commits}">
+        <!--   each遍历users，这样得到的user是特定的user，因此可以在特定的user上做edit操作
+           可以delete操作-->
+        <th scope="row" th:text="${commit.id}"></th>
+        <td th:text="${commit.name}"></td>
+        <td th:text="${commit.userId}"></td>
+        <td th:text="${commit.tel}"></td>
+        <td id="job" th:text="${commit.job}"></td>
+        <td id="state" th:text="${commit.state}"></td>
+        <td id="exp" th:text="${commit.exp}"></td>
+        <td><img th:src="${commit.fileSrc}" style="width: 40px;height: 30px"></td>
+        <td><a th:href="@{/toEditPass(id=${commit.id},
+        userId = ${commit.userId},
+        name = ${commit.name},
+        job = ${commit.job},
+        exp = ${commit.exp},
+        fileSrc = ${commit.fileSrc})}"class="ui orange basic left pointing label"><i class="user icon"></i>通过</a></td>
+        <td><a th:href="@{/toEditUnPass(id=${commit.id},userId = ${commit.userId})}"class="ui orange basic left pointing label"><i class="link close icon"></i>未通过</a></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</body>
+</html>
+<script>
+  </script>

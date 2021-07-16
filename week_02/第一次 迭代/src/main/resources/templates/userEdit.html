@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>修改用户</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="css/me.css">
+</head>
+<body class="container" style="text-align:center;margin-top: 100px;">
+    <br/>
+    <h1>修改用户</h1>
+    <br/><br/>
+    <div class="with:80%">
+        <form  class="form-horizontal" th:action="@{/edit}" th:object="${user}" method="post">
+            <input type="hidden" name="id" th:value="*{id}"/>
+            <div class="ui icon input" style="margin-top: 20px;">
+                <input type="text" class="form-control" name="name" id="name" th:value="*{name}" placeholder="name"/>
+            </div>
+            <div class="ui icon input" style="margin-top: 20px;">
+                <input type="text" class="form-control" name="password" id="password" th:value="*{password}" placeholder="password"/>
+            </div>
+            <input type="submit" value="确定" class="ui middle middle floated teal basic button" style="margin-top: 20px">
+        </form>
+    </div>
+</body>
+</html>
+

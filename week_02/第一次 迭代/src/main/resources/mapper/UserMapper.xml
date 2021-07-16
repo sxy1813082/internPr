@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.test.mapper.UserMapper">
+<!--    下面的 是实现manager的增删改查-->
+    <resultMap id="BaseResultMap" type="com.example.test.bean.UserBean">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="tel" jdbcType="VARCHAR" property="tel" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+    </resultMap>
+    <resultMap id="BaseResultMapCommit" type="com.example.test.bean.CommitBean">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="job" jdbcType="VARCHAR" property="job" />
+        <result column="state" jdbcType="VARCHAR" property="state" />
+        <result column="userId" jdbcType="VARCHAR" property="userId" />
+        <result column="comName" jdbcType="VARCHAR" property="comName" />
+        <result column="tel" jdbcType="VARCHAR" property="tel" />
+        <result column="fileSrc" jdbcType="VARCHAR" property="fileSrc" />
+        <result column="exp" jdbcType="VARCHAR" property="exp" />
+        <result column="src" jdbcType="VARCHAR" property="src" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, name, password,tel,email
+    </sql>
+
+    <!-- 插入数据 -->
+    <insert id="saveUser" parameterType="com.example.test.bean.UserBean">
+        insert into user (id, name, password) values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
+    </insert>
+    <insert id="Register" parameterType="com.example.test.bean.UserBean">
+        insert into user (id, name, password,tel,email) values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},#{tel,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR})
+    </insert>
+
+    <!--插入表，那个区块练的表的东西    -->
+    <insert id="commit" parameterType="com.example.test.bean.CommitBean">
+        insert into commit (id,userId,comName,name,tel,fileSrc,job,exp,state)
+        values (#{id,jdbcType=INTEGER},#{userId,jdbcType=VARCHAR},#{comName,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{tel,jdbcType=VARCHAR},#{fileSrc,jdbcType=VARCHAR},#{job,jdbcType=VARCHAR},#{exp,jdbcType=VARCHAR},#{state,jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 查询所有数据 -->
+    <select id="findByAll" resultMap="BaseResultMap">
+        SELECT  <include refid="Base_Column_List" /> FROM  user
+    </select>
+
+    <!-- 根据id删除某个User信息 -->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from user
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!-- 根据id更新User信息 -->
+    <update id="updateUser" parameterType="com.example.test.bean.UserBean">
+        update user
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateCommit" parameterType="java.lang.Integer">
+        update commit set state = "pass" where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateCommitFile">
+        update commit set src = #{filename,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateCommitUnPass">
+        update commit set state = "unpass" where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!-- 根据id查找User信息 -->
+    <select id="findUserById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where id = #{Id,jdbcType=INTEGER}
+    </select>
+    <!--  根据email查找信息  -->
+    <select id="findUserByEmail" parameterType="String" resultMap="BaseResultMap">
+        select
+        *
+        from user
+        where email = #{email,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getInfoManager" parameterType="String" resultType="com.example.test.bean.UserBean">
+        SELECT * FROM manager WHERE name = #{name} AND password = #{password}
+    </select>
+    <select id="getInfo" parameterType="String" resultType="com.example.test.bean.UserBean">
+        SELECT * FROM user WHERE name = #{name} AND password = #{password}
+    </select>
+    <select id="findYan" resultType="com.example.test.bean.YanBean">
+        select * from yan
+        order by id desc limit 1
+    </select>
+    <select id="findCommit" parameterType="String" resultMap="BaseResultMapCommit">
+        select * from commit WHERE userId = #{userId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findAllCommit" resultMap="BaseResultMapCommit">
+        select * from commit
+    </select>
+
+</mapper>

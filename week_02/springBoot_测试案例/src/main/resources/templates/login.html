@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+</head>
+<body>
+    这里是用户主页，请输入用户的密码
+    <form role="form" action = "/user/login" method="post">
+    <!--        一定要命名为username和password<>-->
+        账号：<input type="text" id="name" name = "username" required="required"><br>
+        密码：<input type="password" id = "password" name = "password" required="required"> <br>
+        <input type="submit" id = "login" value = "login">
+    </form>
+    <div>
+        <a href="/manager">去管理员页面</a>
+        <a href="/toRegister" th:href="@{/toRegister}">注册</a>
+    </div>
+</body>
+</html>

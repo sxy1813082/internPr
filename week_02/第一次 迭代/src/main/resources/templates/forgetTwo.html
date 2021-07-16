@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>重置密码</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <style>
+        .steps {
+            position: relative;
+            margin-top:40px;
+            counter-reset: step;
+            background: #fff;
+            /* margin: 4rem 0rem 4.4rem; */
+            overflow: hidden;
+        }
+
+        /* 步骤描述 */
+
+        .steps li {
+            list-style-type: none;
+            text-align: center;
+            width: 33.3%;
+            position: relative;
+            float: left;
+            padding: 23px 0;
+            font-size:18px;
+            font-family: MicrosoftYaHeiUI;
+            color: rgba(68, 68, 68, 1);
+            line-height: 3.5rem;
+        }
+        /* 步骤数字 */
+        .steps li:before {
+            display: block;
+            content: counter(step);
+            /* 设定计数器内容 */
+            counter-increment: step;
+            /* 计数器值递增 */
+            width: 40px;
+            height: 40px;
+            border-radius:40px;
+            color: #fff;
+            text-align: center;
+            font-weight: 600;
+            margin: 0 auto 0 auto;
+            font-size: 16px;
+            line-height:40px;
+            font-family: MicrosoftYaHeiUI;
+            color:#266fe9;
+            background: rgba(255, 255, 255, 1);
+            border: 2px solid #266fe9;
+        }
+        /* 步骤数字 */
+        .steps .grey:before {
+            color: #CBCBCB !important;
+            border: 0.2rem solid #CBCBCB !important;
+        }
+        .done:before {
+            background-image: url("img/dui.png") !important;
+            background-size: cover !important;
+            background-repeat: no-repeat;
+            content: '' !important;
+        }
+        /* 连接线 */
+        .steps li~li:after {
+            content: '';
+            width: 83%;
+            height: 0.3rem;
+            background-color: #CBCBCB;
+            position: absolute;
+            left: -41.5%;
+            top: 27%;
+            z-index: 0;
+        }
+
+        /* 将当前/完成步骤之前的数字及连接线变绿 */
+
+        .grey {
+            color: #CBCBCB !important;
+        }
+
+        .done {
+            color: #0D3982 !important;
+        }
+        .active{
+            color: #266fe9 !important;
+        }
+    </style>
+</head>
+<body class="container" style="text-align:center;margin-top: 100px;">
+<!--<img src="img/two.png" style="width: 700px;margin-bottom: 80px">-->
+<div class="step1">
+    <div class="stepWrap">
+        <ul class="steps">
+            <li class="done">验证邮箱</li>
+            <li class="done">重置密码</li>
+            <li class='active'>提交审核</li>
+        </ul>
+    </div>
+</div>
+<br/>
+<h1>重置密码</h1>
+<br/><br/>
+<div class="with:80%">
+    <form  class="form-horizontal" th:action="@{/reEdit}" th:object="${user}" method="post">
+        <input type="hidden" name="id" th:value="*{id}"/>
+        <div class="ui icon input" style="margin-top: 20px;">
+            <input type="text" class="form-control" name="name" id="name" th:value="*{name}" placeholder="name"/>
+        </div>
+        <div class="ui icon input" style="margin-top: 20px;">
+            <input type="text" class="form-control" name="password" id="password" th:value="*{password}" placeholder="password"/>
+        </div>
+        <input type="submit" value="确定" class="ui middle middle floated teal basic button" style="margin-top: 20px">
+    </form>
+</div>
+</body>
+</html>
+

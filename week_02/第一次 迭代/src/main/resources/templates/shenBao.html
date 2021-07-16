@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>查看已提交</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body class="container">
+<br/>
+<h1>已申报的申请表单</h1>
+<h4>这里是查看申报，通过可下载</h4>
+<br/><br/>
+<div class="with:80%">
+    <table class="ui  compact teal table">
+        <thead>
+        <tr>
+            <th>表单ID</th>
+            <th>Username</th>
+            <th>job</th>
+            <th>工作经历</th>
+            <th>营业执照</th>
+            <th>state</th>
+            <th>下载</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="commit:${session.commits}">
+            <!--   each遍历users，这样得到的user是特定的user，因此可以在特定的user上做edit操作
+               可以delete操作-->
+            <th scope="row" th:text="${commit.id}"></th>
+            <td th:text="${commit.name}"></td>
+            <td id="job" th:text="${commit.job}"></td>
+            <td th:text="${commit.exp}"></td>
+            <td><img th:src="${commit.fileSrc}" style="width: 40px;height: 30px"></td>
+            <td id="state" th:text="${commit.state}"></td>
+            <td id="down">
+                <button onclick="downLoad(this)" th:value="${commit.src}" class="ui orange basic left pointing label">
+                    <i class="book icon"></i>
+                    <input class="down" type="hidden" th:value="${commit.src}" id="staff_name2"/>
+                下载</button>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+<div class="form-group">
+    <div class="col-sm-2 control-label">
+        <a href="/login" class="ui mini left floated teal basic button">返回用户主页</a>
+    </div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+    function downLoad(src){
+        //解决文件路径获取的问题
+        var a = $(src).val();
+       // alert(a);
+        if (a != '') {
+            window.open(a);
+        }
+        else {
+            alert("这个没通过不能获得下载的权力");
+        }
+    }
+
+</script>

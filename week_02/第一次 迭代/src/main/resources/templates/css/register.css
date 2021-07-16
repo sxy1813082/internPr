@@ -1,0 +1,565 @@
+html,body{
+    width:100%;
+    height:100%;
+    background-color:#fafafa;
+}
+.top{
+    width:100%;
+    height:80px;
+    line-height:80px;
+    background-color:#fff;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.05); 
+}
+.top img{
+    margin-left:80px;
+    width:484px;
+}
+.top span{
+    font-size:23px;
+    font-family: PingFangSC, PingFangSC-Medium;
+    font-weight: 500;
+    color: #04185f;
+    vertical-align: bottom;
+}
+.stepWrap{
+    width:1100px;
+    background: #ffffff;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.05);
+    margin:0 auto; 
+}
+.steps {
+    position: relative;
+    margin-top:40px;
+    counter-reset: step;
+    background: #fff;
+    /* margin: 4rem 0rem 4.4rem; */
+    overflow: hidden;
+}
+
+/* 步骤描述 */
+
+.steps li {
+    list-style-type: none;
+    text-align: center;
+    width: 33.3%;
+    position: relative;
+    float: left;
+    padding: 23px 0;
+    font-size:18px;
+    font-family: MicrosoftYaHeiUI;
+    color: rgba(68, 68, 68, 1);
+    line-height: 3.5rem;
+}
+/* 步骤数字 */
+.steps li:before {
+    display: block;
+    content: counter(step);
+    /* 设定计数器内容 */
+    counter-increment: step;
+    /* 计数器值递增 */
+    width: 40px;
+    height: 40px;
+    border-radius:40px;
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+    margin: 0 auto 0 auto;
+    font-size: 16px;
+    line-height:40px;
+    font-family: MicrosoftYaHeiUI;
+    color:#266fe9;
+    background: rgba(255, 255, 255, 1);
+    border: 2px solid #266fe9;
+}
+/* 步骤数字 */
+.steps .grey:before {
+    color: #CBCBCB !important;
+    border: 0.2rem solid #CBCBCB !important;
+}
+/* 连接线 */
+.steps li~li:after {
+    content: '';
+    width: 83%;
+    height: 2px;
+    background-color: #CBCBCB;
+    position: absolute;
+    left: -41.5%;
+    top: 27%;
+    z-index: 0;
+}
+/* 将当前/完成步骤之前的数字及连接线变绿 */
+.steps li.active:before,
+.steps li.active:after {
+    background-color: #ffffff;
+    /* font-size:2.8rem;
+    font-family:MicrosoftYaHeiUI;
+    color:rgba(68,68,68,1);
+    line-height:3.5rem; */
+}
+.active{
+    color:#266fe9 !important;
+}
+.grey {
+    color: #CBCBCB !important;
+}
+.contWrap{
+    padding-top:30px;
+    padding-bottom:30px;
+    width:1100px;
+    min-height:720px;
+    margin:30px auto;
+    background: #ffffff;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.05); 
+}
+
+
+#registerForm{
+    width:500px;
+    margin:0 auto;
+}
+.form_control{
+    margin-top:42px;
+}
+.inputWrapper input::input-placeholder {
+    font-family:Microsoft YaHei UI;
+    font-weight:400;
+    color:rgba(203,203,203,1);
+    opacity:1;
+}
+.inputWrapper input::-webkit-input-placeholder {
+    font-family:Microsoft YaHei UI;
+    font-weight:400;
+    color:rgba(203,203,203,1);
+    opacity:1;
+   
+
+}
+
+.inputWrapper input:-ms-input-placeholder {
+    font-family:Microsoft YaHei UI;
+    font-weight:400;
+    color:rgba(203,203,203,1);
+    opacity:1;
+}
+
+.inputWrapper input:-moz-placeholder {
+    font-family:Microsoft YaHei UI;
+    font-weight:400;
+    color:rgba(203,203,203,1);
+    opacity:1;
+    line-height:normal;
+}
+.inputWrapper .sqname{
+    color:#E63A3A;
+}
+.inputWrapper{
+    margin-bottom:30px;
+}
+.inputWrapper input,.inputWrapper select{
+    margin-top:10px;
+    border-radius:3px;
+    width:500px;
+    height:36px;
+    border: 1px solid #cacaca;
+    text-indent:1em;
+    outline:none;
+}
+.inputWrapper input:focus,.inputWrapper textarea:focus{
+    outline:none;
+    border: 1px solid #2394f2;
+}
+.inputWrapper textarea{
+    width:100%;
+    height:108px;
+    border: 1px solid #cacaca;
+    text-indent:1em;
+}
+.nextBtn{
+    width: 120px;
+    height: 36px;
+    background: #266fe9;
+    border-radius: 2px;
+    outline:none;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+}
+.valid_message{
+    position:absolute;
+    font-size:14px;
+    color:red;
+}
+
+#steps2{
+    width:1100px;
+    margin:0 auto;
+}
+
+/* 第二步骤描述 */
+.steps2 {
+    position: relative;
+    margin-top:40px;
+    counter-reset: step;
+    background: #fff;
+    /* margin: 4rem 0rem 4.4rem; */
+    overflow: hidden;
+}
+.steps2 li {
+    list-style-type: none;
+    text-align: center;
+    width: 33.3%;
+    position: relative;
+    float: left;
+    padding: 23px 0;
+    font-size:18px;
+    font-family: MicrosoftYaHeiUI;
+    color: rgba(68, 68, 68, 1);
+    line-height: 3.5rem;
+}
+
+/* 步骤数字 */
+
+.steps2 li:before {
+    display: block;
+    content: counter(step);
+    /* 设定计数器内容 */
+    counter-increment: step;
+    /* 计数器值递增 */
+    width: 40px;
+    height: 40px;
+    border-radius:40px;
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+    margin: 0 auto 0 auto;
+    font-size: 16px;
+    line-height:40px;
+    font-family: MicrosoftYaHeiUI;
+    color:#266fe9;
+    background: rgba(255, 255, 255, 1);
+    border: 2px solid #266fe9;
+}
+
+/* 步骤数字 */
+
+.steps2 .grey:before {
+    color: #CBCBCB !important;
+    border: 0.2rem solid #CBCBCB !important;
+}
+
+.done:before {
+    background-image: url("../img/dui.png") !important;
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    content: '' !important;
+
+}
+
+/* 连接线 */
+
+.steps2 li~li:after {
+    content: '';
+    width: 83%;
+    height: 0.3rem;
+    background-color: #CBCBCB;
+    position: absolute;
+    left: -41.5%;
+    top: 27%;
+    z-index: 0;
+}
+
+/* 将当前/完成步骤之前的数字及连接线变绿 */
+
+.grey {
+    color: #CBCBCB !important;
+}
+
+.done {
+    color: #0D3982 !important;
+}
+#step2From,#fileForm{
+    width:500px;
+    margin:0 auto;
+}
+#fileBox2,
+#fileBox,
+#fileBox1 {
+    margin: /*1*/
+    rem 0;
+}
+
+#fileBox2 .xslabel2,
+#fileBox .xslabel,
+#fileBox1 .xslabel1 {
+    display: block;
+    float: left;
+    height: 103px;
+    width: 103px;
+    background: url('../img/add.png') no-repeat center;
+    background-size: cover;
+    margin-left: .17rem;
+    cursor: pointer;
+    font-size: 0;
+    line-height: 0;
+    text-indent: -9999px;
+}
+
+#fileBox2 .clone-dom2,
+#fileBox .clone-dom,
+#fileBox1 .clone-dom1 {
+    border: 1px solid #ccc;
+    display: none;
+    float: left;
+    height: 103px;
+    width: 103px;
+    background: url('../img/add.png') no-repeat center;
+    background-size: cover;
+    margin-left: .17rem;
+}
+
+#fileBox2 .file-btn2,
+#fileBox .file-btn,
+#fileBox1 .file-btn1 {
+    height: 50px;
+    width: 50px;
+    margin: 0 .5rem .5rem 0;
+    opacity: 0;
+}
+
+#fileBox2 .review-box2,
+#fileBox .review-box,
+#fileBox1 .review-box1 {
+    display: block;
+    float: left;
+    margin-left: .17rem;
+}
+
+#fileBox2 .review-box2 img,
+#fileBox .review-box img,
+#fileBox1 .review-box1 img {
+    height: 103px;
+    width: 103px;
+    margin: 0 .1rem .2rem 0;
+}
+
+#fileBox2 .prev-item2,
+#fileBox .prev-item,
+#fileBox1 .prev-item1 {
+    position: relative;
+    display: inline-block;
+}
+
+#fileBox2 .prev-item2 .closebtn2,
+#fileBox .prev-item .closebtn,
+#fileBox1 .prev-item1 .closebtn1 {
+    position: absolute;
+    right: -1px;
+    top: -4px;
+    display: block;
+    height: 14px;
+    width: 14px;
+    color: #fff;
+    font-size: 16px;
+    line-height: 14px;
+    text-align: center;
+    background: red;
+    border-radius: 10px;
+}
+
+#fileBox2 .prev-item2 .closebtn2,
+#fileBox .prev-item .closebtn,
+#fileBox1 .prev-item1 .closebtn1 {
+    position: absolute;
+    right: -15px;
+    top: -20px;
+    display: block;
+    height: 24px;
+    width: 24px;
+    color: #fff;
+    font-size: 24px;
+    line-height: 24px;
+    text-align: center;
+    background: #8E8E93;
+    border-radius: 50px;
+}
+.buttonWrap button{
+    width: 120px;
+    height: 36px;
+    background: #266fe9;
+    border-radius: 2px;
+    outline:none;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+}
+
+
+
+#fullbg {
+    background-color: gray;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+}
+
+#dialog {
+    background-color: #fff;
+    border: 1px solid #dcdcdc;
+    width: 600px;
+    margin: 0 auto;
+    position: fixed !important;
+    /* 浮动对话框 */
+    position: absolute;
+    top: 20%;
+    z-index: 5;
+    left: 50%;
+    margin-left: -300px;
+    border-radius: 0.5rem;
+    display: none;
+}
+
+#dialog p {
+    margin: 0 0 12px;
+    height: 24px;
+    line-height: 24px;
+    background: #CCCCCC;
+}
+
+#dialog p.close {
+    text-align: right;
+    padding-right: 10px;
+}
+
+#dialog p.close a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.checkdiv {
+    height:300px;
+    margin: 0rem auto;
+    text-align: center;
+    position: relative;
+    display: none;
+}
+
+.checkdiv1 {
+    display: inline-block;
+    height:300px;
+    width:100%;
+}
+
+.line {
+    width: 100%;
+    height: 2.6rem;
+    display: none;
+}
+
+.checkimg {
+    width:100%;
+}
+
+.refreshimg {
+    width:40px;
+}
+
+.refreshdiv {
+    display: inline-block;
+    width:40px;
+    height:40px;
+    position: absolute;
+    top:10px;
+    right:10px;
+}
+
+
+.button {
+    text-align: center;
+    height:50px;
+    line-height:50px;
+    background: linear-gradient(225deg, rgba(157, 55, 241, 1) 0%, rgba(38, 111, 233, 1) 100%);
+    border-radius: 0.6rem;
+    /* margin: 6rem auto; */
+    display: none;
+}
+
+.buttontext {
+    font-size:18px;
+    font-family: MicrosoftYaHeiUI;
+    color: rgba(255, 255, 255, 1);
+    line-height:50px;
+}
+
+.addimg1 {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height:40px;
+    border-radius:40px;
+    border: 2px solid rgba(38, 111, 233, 1);
+    font-size: 18px;
+    color: blue;
+    background: white;
+}
+
+
+
+.addimg2 {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height:40px;
+    border-radius:40px;
+    border: 2px solid rgba(38, 111, 233, 1);
+    font-size: 18px;
+    color: blue;
+    background: white;
+}
+
+.addimg3 {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height:40px;
+    border-radius:40px;
+    border: 2px solid rgba(38, 111, 233, 1);
+    font-size: 18px;
+    color: blue;
+    background: white;
+}
+
+.inputWrap label{
+    display:block;
+    color: #444444;
+}
+.inputWrap label span{
+    color:red;
+}
+.inputWrap select{
+    display:block;
+    width:100%;
+    height:36px;
+    border: 1px solid #cacaca;
+}
+.smsBtn{
+    display:inline-block;
+    width:150px;
+    height:38px;
+    background-color:#266fe9;
+    line-height:38px;
+    text-align:center;
+    font-size:14px;
+    color:#fff;
+    vertical-align:bottom;
+    cursor: pointer;
+    border:none;
+    outline:none;
+}
+.dx .valid_message{
+    display:block;
+}

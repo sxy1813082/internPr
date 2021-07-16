@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>userList</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+</head>
+<body class="container">
+<br/>
+<h1>user list</h1>
+<h4>这里是管理员主页</h4>
+<br/><br/>
+<div class="with:80%">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>password</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+    <!--   each遍历users，这样得到的user是特定的user，因此可以在特定的user上做edit操作
+       可以delete操作-->
+      <th scope="row" th:text="${user.id}"></th>
+      <td th:text="${user.name}"></td>
+      <td th:text="${user.password}"></td>
+      <td><a th:href="@{/toEdit(id=${user.id})}">edit</a></td>
+      <td><a th:href="@{/delete(id=${user.id})}">delete</a></td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<div class="form-group">
+  <div class="col-sm-2 control-label">
+    <a href="/toAdd" th:href="@{/toAdd}" class="btn btn-info">add</a>
+  </div>
+  <div class="col-sm-2 control-label">
+    <a href="/login" class="btn btn-info">返回用户主页</a>
+  </div>
+
+</div>
+</body>
+</html>
